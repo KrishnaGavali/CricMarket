@@ -1,15 +1,96 @@
 "use client";
 import { Eye, EyeClosed } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "../../../Components/ui/hover-card";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const [message, setMessage] = useState<string>("");
+  const [messagetype, setMessageType] = useState<"success" | "error">(
+    "success"
+  );
+
+  const router = useRouter();
+
+  const signUpFormRef = useRef<HTMLFormElement | null>(null);
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const form = signUpFormRef.current;
+    if (!form) return;
+
+    const formData = new FormData(form);
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (!name || !email || !password || !confirmPassword) {
+      console.log({ name, email, password, confirmPassword });
+
+      setMessage("All fields are required.");
+      setMessageType("error");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setMessage("Invalid email format.");
+      setMessageType("error");
+      return;
+    }
+
+    if (password.length < 6) {
+      setMessage("Password must be at least 6 characters long.");
+      setMessageType("error");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match.");
+      setMessageType("error");
+      return;
+    }
+
+    fetch("http://localhost:8000/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    }).then((response) => {
+      response.json().then((data: { success: boolean; message: string }) => {
+        if (data.success) {
+          setMessage(data.message);
+          setMessageType("success");
+          form.reset();
+          router.push("/dashboard"); // Redirect to login page after successful signup
+        } else {
+          setMessage(data.message);
+          setMessageType("error");
+        }
+      });
+    });
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage(" ");
+      setMessageType("success");
+    }, 2000);
+  }, [message, messagetype]);
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center relative z-[3]">
@@ -18,16 +99,19 @@ const SignUpPage = () => {
         <form
           action=""
           className=" flex flex-col gap-4 p-4 border-b border-blue-800 w-full"
+          ref={signUpFormRef}
         >
           <input
             type="text"
             placeholder="Name"
+            name="name"
             className="w-full p-2 rounded-md bg-gray-800/75 text-white"
             required
           />
           <input
             type="email"
             placeholder="Email"
+            name="email"
             className="w-full p-2 rounded-md bg-gray-800/75 text-white"
             required
           />
@@ -35,6 +119,7 @@ const SignUpPage = () => {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
+              name="password"
               className="w-full p-2 rounded-md bg-gray-800/75 text-white"
               required
             />
@@ -55,17 +140,25 @@ const SignUpPage = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Confirm Password"
+            name="confirmPassword"
             className="w-full p-2 rounded-md bg-gray-800/75 text-white"
             required
           />
           <button
             type="submit"
+            name="signup"
             className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer"
+            onClick={handleSignup}
           >
             Signup
           </button>
-          <p className=" text-green-500 text-base text-center" id="alert">
-            Account Created Successfully
+          <p
+            className={`text-green-500 text-base text-center ${
+              messagetype === "success" ? "text-green-500" : "text-red-500"
+            }`}
+            id="alert"
+          >
+            {message}
           </p>
         </form>
         <div className="m-2 flex justify-center items-center ">
