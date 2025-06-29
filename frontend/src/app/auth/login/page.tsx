@@ -123,7 +123,7 @@ const LoginPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer"
+              className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer border border-transparent hover:border-blue-800"
             >
               Login
             </button>
@@ -144,7 +144,7 @@ const LoginPage = () => {
                 </div>
               </HoverCardTrigger>
               <HoverCardContent side="right" className="p-2" asChild>
-                <div className=" w-fit h-fit text-white text-xs flex justify-center items-center rounded-md border border-blue-800">
+                <div className=" w-fit h-fit text-white text-xs flex justify-center items-center rounded-md border border-blue-800 ">
                   Work in Progress
                 </div>
               </HoverCardContent>

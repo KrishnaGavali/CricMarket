@@ -13,7 +13,7 @@ const HeroSection = () => {
         className=" absolute w-full h-full"
         quality={0}
       />
-      <div className=" w-full h-[10%] " id="navBarPlaceholder"></div>
+      <div className=" w-full h-[10%] " id="navBarPlaceholder" />
 
       <div className="flex">
         <div className="h-[90%] w-full p-10 z-[2] relative">

@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LogIn } from "lucide-react";
 
 const Navbar = () => {
   const currentPathName = usePathname();
@@ -72,10 +73,7 @@ const Navbar = () => {
                         <Link href="/">Home</Link>
                       </NavigationMenuTrigger>
                     </NavigationMenuItem>
-                    <NavigationMenuItem
-                      className=" cursor-pointer transition-all duration-300 w-fit text-center px-4 py-2"
-                      asChild
-                    >
+                    <NavigationMenuItem className=" cursor-pointer transition-all duration-300 w-fit text-center px-4 py-2">
                       <NavigationMenuTrigger className=" text-base font-semibold">
                         Matches
                       </NavigationMenuTrigger>
@@ -104,8 +102,9 @@ const Navbar = () => {
           id="auth_profile_items"
         >
           <Link href={"/auth/login"}>
-            <button className="px-4 py-2 bg-blue-800 border border-blue-800 text-white rounded-md cursor-pointer hover:bg-transparent hover:text-foreground transition-all duration-300 mx-4 lg:mx-8 text-sm md:text-base">
-              Login
+            <button className=" flex px-4 py-2 bg-blue-800 border border-blue-800 text-white rounded-md cursor-pointer hover:bg-transparent hover:text-foreground transition-all duration-300 mx-4 lg:mx-8 text-sm md:text-base">
+              <span className="mr-1">Login</span>
+              <LogIn />
             </button>
           </Link>
         </div>

@@ -147,7 +147,7 @@ const SignUpPage = () => {
           <button
             type="submit"
             name="signup"
-            className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer"
+            className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer border border-transparent hover:border-blue-800"
             onClick={handleSignup}
           >
             Signup
@@ -180,7 +180,7 @@ const SignUpPage = () => {
           <p className="text-center text-sm mt-2 text-white">
             Has an account?{" "}
             <Link href="/auth/login">
-              <span className="text-blue-500 cursor-pointer hover:underline">
+              <span className="text-blue-500 cursor-pointer hover:underline ">
                 Login
               </span>
             </Link>
