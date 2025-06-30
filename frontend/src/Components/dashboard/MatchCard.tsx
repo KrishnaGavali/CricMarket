@@ -17,7 +17,7 @@ const MatchCard = () => {
     "1",
   ]); // Example runs in this over
 
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -26,7 +26,7 @@ const MatchCard = () => {
   }, [runsInThisOver]); // run this effect whenever runs change
 
   return (
-    <div className="matchCard border-white border rounded-lg h-fit bg-white/5 backdrop-blur-sm p-2 flex">
+    <div className=" border border-slate-700 rounded-lg h-fit bg-gray-300/5 backdrop-blur-sm p-2 flex">
       {/* Left Section */}
       <div className="flex flex-col items-center px-1 h-full w-3/4 justify-center border-r border-blue-800">
         {/* Team Info Section */}
@@ -40,7 +40,7 @@ const MatchCard = () => {
               <Image
                 src="/MumbaiIndians.png"
                 alt="Team A Logo"
-                className="rounded-full"
+                className="rounded-full h-16 w-16"
                 width={60}
                 height={60}
               />
@@ -59,7 +59,7 @@ const MatchCard = () => {
               <Image
                 src="/csk.png"
                 alt="Team B Logo"
-                className="rounded-full"
+                className="rounded-full h-16 w-16"
                 width={60}
                 height={60}
               />

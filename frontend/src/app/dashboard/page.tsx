@@ -3,6 +3,7 @@ import Leaderboard from "../../Components/dashboard/LeaderBoard";
 import MatchCard from "../../Components/dashboard/MatchCard";
 import "./dashboard.css";
 import Image from "next/image";
+import Profile from "../../Components/dashboard/Profile";
 
 const UserDashBoardPage = () => {
   const matchArrayData = new Array(2).fill({
@@ -96,11 +97,11 @@ const UserDashBoardPage = () => {
                   stocks. Learn the ropes or jump right in!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 w-full">
-                  <button className="w-full sm:w-auto px-6 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-200 shadow">
-                    🚀 Start Onboarding
+                  <button className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer border border-transparent hover:border-blue-800">
+                    Start Onboarding
                   </button>
-                  <button className="w-full sm:w-auto px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold rounded-lg transition-all duration-200 shadow">
-                    📺 Watch Tutorial
+                  <button className="w-full p-2 bg-blue-800 text-white rounded-md hover:bg-blue-950 transition-all duration-300 cursor-pointer border border-transparent hover:border-blue-800">
+                    Watch Tutorial
                   </button>
                 </div>
               </div>
@@ -109,40 +110,7 @@ const UserDashBoardPage = () => {
         </div>
 
         {/* Right Sidebar - Profile Section */}
-        <div className="w-72 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-5 shadow-md hidden lg:flex flex-col gap-5 text-white font-sans">
-          <div className="text-center space-y-1">
-            <h3 className="text-xl font-semibold tracking-wide">Krishna 👋</h3>
-            <p className="text-sm text-gray-400">krishna@cricmarket.com</p>
-          </div>
-
-          <div className="text-sm text-gray-300 space-y-3">
-            <div className="flex justify-between items-center">
-              <span>🎮 Matches Played</span>
-              <span className="text-white font-medium">12</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span>💰 Total Return</span>
-              <span className="text-green-400 font-semibold">₹1,23,000</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span>📈 ROI</span>
-              <span className="text-purple-400 font-semibold">18.5%</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span>🧠 Avg/Match</span>
-              <span className="text-yellow-300 font-semibold">₹10,250</span>
-            </div>
-          </div>
-
-          <div className="mt-auto flex flex-col gap-2">
-            <button className="w-full py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-xl font-semibold transition">
-              Edit Profile
-            </button>
-            <button className="w-full py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 rounded-xl font-semibold transition">
-              Logout
-            </button>
-          </div>
-        </div>
+        <Profile />
       </div>
     </div>
   );
