@@ -11,7 +11,7 @@ const matchHistory = [
 
 const Profile = () => {
   return (
-    <div className="w-80 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-lg hidden lg:flex flex-col gap-6 text-white font-sans">
+    <div className="max-w-72 bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-lg lg:flex flex-col gap-6 text-white z-[2] lg:max-w-96 lg:w-full">
       {/* Header */}
       <div className="text-center space-y-1">
         <h3 className="text-2xl font-bold tracking-wide">Krishna Gavali 👋</h3>
@@ -39,7 +39,7 @@ const Profile = () => {
       </div>
 
       {/* Match History */}
-      <div className="flex flex-col gap-2 max-h-44 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-transparent custom-scrollbar">
+      <div className="flex flex-col gap-2 max-h-44 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-transparent custom-scrollbar mb-2">
         <h4 className="text-lg font-semibold text-white mt-2">Match History</h4>
         {matchHistory.map((match, index) => (
           <div

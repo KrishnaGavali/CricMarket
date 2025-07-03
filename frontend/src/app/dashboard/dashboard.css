@@ -16,20 +16,6 @@
   background: transparent;
 }
 
-.custom-scrollbar2::-webkit-scrollbar {
-  height: 5px;
-}
-
-.custom-scrollbar2::-webkit-scrollbar-thumb {
-  background-color: #193cb8;
-  border-radius: 4px;
-  transition: background 0.3s;
-}
-
-.custom-scrollbar2::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.custom-scrollbar2::-webkit-scrollbar-track {
-  background: transparent;
+.custom-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }

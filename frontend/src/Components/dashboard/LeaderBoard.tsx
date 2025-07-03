@@ -11,7 +11,7 @@ const medalColors = ["text-yellow-400", "text-gray-300", "text-yellow-700"];
 
 const Leaderboard = ({ data = sampleLeaderboard }) => {
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-4 w-full max-w-md backdrop-blur-sm text-sm text-gray-200 space-y-2 shadow-md">
+    <div className="bg-white/5 border border-white/10 rounded-xl p-4 w-[95%] mx-auto sm:w-1/2 backdrop-blur-sm text-sm text-gray-200 space-y-2 shadow-md ">
       <div className="flex items-center gap-2 text-white text-lg font-semibold mb-3">
         <Trophy className="text-yellow-400 w-5 h-5" />
         Leaderboard

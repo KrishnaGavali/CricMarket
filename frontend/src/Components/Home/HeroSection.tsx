@@ -1,5 +1,4 @@
 import React from "react";
-import AnimatedHeroSectionBackground from "./AnimatedHeroSectionBackground";
 import Image from "next/image";
 
 const HeroSection = () => {
@@ -33,9 +32,12 @@ const HeroSection = () => {
                 knowledge to the ultimate test.
               </p>
             </div>
-            <div className=" w-full flex mt-2">
-              <button className="px-4 py-2 bg-blue-800 border border-blue-800 text-white rounded-md cursor-pointer hover:bg-blue-950 hover:text-white transition-all duration-300 text-base md:text-xl mx-auto">
+            <div className=" w-full flex mt-2 justify-center items-center sm:gap-x-2 gap-y-2 flex-col sm:flex-row">
+              <button className="px-4 py-2 bg-blue-800 border border-blue-800 text-white rounded-md cursor-pointer hover:bg-blue-950 hover:text-white transition-all duration-300 text-base md:text-xl">
                 Start Playing Now
+              </button>
+              <button className="px-4 py-2  border border-white text-white rounded-md cursor-pointer hover:bg-gray-950 hover:text-white transition-all duration-300 text-base md:text-xl">
+                How to Play (YouTube)
               </button>
             </div>
           </div>
