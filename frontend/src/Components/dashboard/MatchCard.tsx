@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import "../../app/dashboard/dashboard.css";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const MatchCard = () => {
   const [runsInThisOver, setRunsInThisOver] = useState<Array<string>>([]); // Example runs in this over
@@ -18,6 +19,10 @@ const MatchCard = () => {
       scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
     }
   }, [runsInThisOver]); // run this effect whenever runs change
+
+  const currPath = usePathname();
+
+  console.log("Current Path:", currPath);
 
   return (
     <div className="border border-slate-700 rounded-lg h-fit backdrop-blur-sm p-1 flex flex-col min-w-full items-center">
@@ -154,9 +159,11 @@ const MatchCard = () => {
           </div>
         </div>
       </div>
-      <button className="flex items-center justify-center w-fit h-fit p-3 bg-blue-800 rounded-lg lg:h-[15%]">
-        Enter into Match
-      </button>
+      {currPath === "" ? (
+        <button className="flex items-center justify-center w-fit h-fit p-3 bg-blue-800 rounded-lg lg:h-[15%]">
+          Enter into Match
+        </button>
+      ) : null}
     </div>
   );
 };

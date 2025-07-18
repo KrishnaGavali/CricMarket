@@ -1,0 +1,74 @@
+Project Statement
+
+🧾 CRICMARKET - README.txt
+
+━━━━━━━━━━━━━━━━━━━━━
+🏏 What is CricMarket?
+━━━━━━━━━━━━━━━━━━━━━
+
+CricMarket is a **fantasy stock market** simulation tied to live cricket matches.
+
+- Every user starts with ₹10,000 (virtual currency) per match.
+- Each match has **2 stocks** — one per team (e.g., CSK 🟡 vs MI 🔵).
+- After the toss, an **IPO phase** begins for both teams. Users can bid for stocks at custom prices.
+- Once the match starts, users can place **market** and **limit orders** to buy/sell team stocks.
+- Prices are not fixed by the system — they are **driven entirely by user demand and supply**.
+- At the end of the match, team performance determines how much each stock is worth.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+🛠 How the Flow Works (Behind the Scenes)
+━━━━━━━━━━━━━━━━━━━━━━━
+
+1. **Admin Dashboard** 🛡️
+   - Admin logs in to the internal panel.
+   - Can create a new match entry with:
+     - Match ID, teams, date/time, toss winner, match type (e.g., IPL, T20, ODI).
+   - Sets initial IPO window time (e.g., 30 mins before the match).
+   - Manually opens IPO with:
+     - Max IPO stock count
+     - Base suggested price (can be ₹100, but users can bid differently)
+
+2. **User View** 👤
+   - Match card shows up in the app/website.
+   - Before match:
+     - Users enter the IPO auction.
+     - Bid for desired number of stocks and price.
+   - During match:
+     - Trade stocks in real-time with:
+       - Market Order (instant match at best price)
+       - Limit Order (set your own buy/sell condition)
+     - All transactions are handled via Redis queue for real-time updates.
+
+3. **Real-Time Match Data**
+   - Admin or system hits an **update match status** API.
+   - Can set:
+     - Toss winner
+     - Match started flag
+     - Live score updates (optional enhancement)
+     - Match result (final outcome)
+
+4. **Post-Match**
+   - Admin sets winning team.
+   - System automatically calculates:
+     - Winning stock price = ₹200 (for example)
+     - Losing stock price = ₹0 or a lower recovery price (like ₹50)
+   - Users' portfolios are updated and net profit/loss is displayed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+🧠 Tech Behind the Curtains (Dev Insights)
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 Backend Stack:
+- FastAPI / Node.js (Your choice)
+- Redis (real-time order book handling)
+- MongoDB (user, match, and transaction data)
+- WebSockets (for live stock feed updates)
+
+🎮 Admin Update Flow:
+- `/admin/create-match` → Create a match
+- `/admin/update-toss` → Update toss winner
+- `/admin/open-ipo` → Trigger IPO
+- `/admin/update-match-status` → Start match / Update live score (optional)
+- `/admin/close-match` → Declare result and distribute rewards
+
+💼 Da
