@@ -76,7 +76,7 @@ const SignUpPage = () => {
           setMessage(data.message);
           setMessageType("success");
           form.reset();
-          router.push("/dashboard"); // Redirect to login page after successful signup
+          router.push("/dashboard");
         } else {
           setMessage(data.message);
           setMessageType("error");

@@ -1,5 +1,7 @@
+"use client";
 import React, { useState } from "react";
 import { X, Trash2, PlusCircle } from "lucide-react";
+import toast from "react-hot-toast"; // ✅ importing toast
 
 const AddMatchOverlay = ({ onClose }: { onClose: () => void }) => {
   const [matchDetails, setMatchDetails] = useState({
@@ -23,23 +25,9 @@ const AddMatchOverlay = ({ onClose }: { onClose: () => void }) => {
     setMatchDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateUrl = (url: string) => {
-    const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*\/?$/;
-    return urlPattern.test(url);
-  };
-
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (!validateUrl(value)) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "Invalid URL. Please provide a valid Cloudinary URL.",
-      }));
-      setMatchDetails((prev) => ({ ...prev, [name]: "" }));
-    } else {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-      setMatchDetails((prev) => ({ ...prev, [name]: value }));
-    }
+    setMatchDetails((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleClearFields = () => {
@@ -59,13 +47,34 @@ const AddMatchOverlay = ({ onClose }: { onClose: () => void }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!matchDetails.teamALogo || !matchDetails.teamBLogo) {
-      alert("Please provide valid URLs for both team logos.");
+      toast.error("Both team logos must be valid URLs.");
       return;
     }
-    console.log("Match Details Submitted:", matchDetails);
-    onClose();
+
+    try {
+      const response = await fetch("http://localhost:8000/match/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(matchDetails),
+      });
+
+      if (!response.ok) {
+        const err = await response.text();
+        throw new Error(err || "Something went wrong.");
+      }
+
+      const data = await response.json();
+      toast.success("Match added successfully! 🎉");
+      console.log("Match added successfully:", data);
+      onClose();
+    } catch (error) {
+      console.error("Error adding match:", error);
+      toast.error(error.message || "Failed to add match.");
+    }
   };
 
   return (
@@ -110,7 +119,9 @@ const AddMatchOverlay = ({ onClose }: { onClose: () => void }) => {
             className="bg-transparent border border-slate-700 rounded-md p-2 text-white"
           />
           {errors.teamALogo && (
-            <p className="text-red-500 text-sm">{errors.teamALogo}</p>
+            <p className="text-red-500 text-sm col-span-2">
+              {errors.teamALogo}
+            </p>
           )}
           <input
             type="text"
@@ -121,7 +132,9 @@ const AddMatchOverlay = ({ onClose }: { onClose: () => void }) => {
             className="bg-transparent border border-slate-700 rounded-md p-2 text-white"
           />
           {errors.teamBLogo && (
-            <p className="text-red-500 text-sm">{errors.teamBLogo}</p>
+            <p className="text-red-500 text-sm col-span-2">
+              {errors.teamBLogo}
+            </p>
           )}
           <input
             type="number"

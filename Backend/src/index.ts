@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import cors from "cors"; // Import cors
 import { authRouter } from "./routes/auth.route";
 import connectDB from "./server";
+import matchRouter from "./routes/match.route";
 
 const app = express();
 const PORT = 8000;
@@ -27,6 +28,7 @@ console.log("Starting the backend server...");
 app.use(express.json());
 
 app.use("/auth", authRouter);
+app.use("/match", matchRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Backend is running!");

@@ -10,6 +10,7 @@ const socket_io_1 = require("socket.io");
 const cors_1 = __importDefault(require("cors")); // Import cors
 const auth_route_1 = require("./routes/auth.route");
 const server_1 = __importDefault(require("./server"));
+const match_route_1 = __importDefault(require("./routes/match.route"));
 const app = (0, express_1.default)();
 const PORT = 8000;
 // Enable CORS
@@ -26,6 +27,7 @@ exports.io = new socket_io_1.Server(httpServer, {
 console.log("Starting the backend server...");
 app.use(express_1.default.json());
 app.use("/auth", auth_route_1.authRouter);
+app.use("/match", match_route_1.default);
 app.get("/", (req, res) => {
     res.send("Backend is running!");
 });

@@ -19,13 +19,13 @@ const MatchSchema = new Schema({
   },
   teamACurrentStatus: {
     type: String,
-    enum: ["Batting", "Bowling"],
-    default: "Batting",
+    enum: ["Batting", "Bowling", "Waiting"],
+    default: "Waiting",
   },
   teamBCurrentStatus: {
     type: String,
-    enum: ["Batting", "Bowling"],
-    default: "Bowling",
+    enum: ["Batting", "Bowling", "Waiting"],
+    default: "Waiting",
   },
   teamAScore: {
     type: Number,
@@ -44,12 +44,12 @@ const MatchSchema = new Schema({
     default: 0,
   },
   teamAStockPrice: {
-    type: mongoose.Schema.Types.Mixed,
-    default: {},
+    type: Number,
+    required: true,
   },
   teamBStockPrice: {
     type: Number,
-    default: 0,
+    required: true,
   },
   overs: {
     type: Number,
@@ -61,8 +61,13 @@ const MatchSchema = new Schema({
   },
   matchStatus: {
     type: String,
-    enum: ["scheduled", "in-progress", "completed"],
+    enum: ["scheduled", "in-progress", "completed", "paused"],
     default: "scheduled",
+  },
+  onGoingMatchStatus: {
+    type: Schema.Types.Mixed,
+    enum: ["auction", "in_match", null],
+    default: "auction",
   },
 });
 
