@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addMatch = void 0;
+exports.getMatches = exports.addMatch = void 0;
 const Match_model_1 = __importDefault(require("../models/Match.model"));
 // filepath: D:/cricmarket/Backend/src/controllers/match.controller.ts
 // Controller to add a new match
@@ -51,3 +51,19 @@ const addMatch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addMatch = addMatch;
+const getMatches = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const matches = yield Match_model_1.default.find({}, "teamAName teamBName teamALogoURL teamBLogoURL");
+        res.status(200).json({
+            message: "Matches fetched successfully.",
+            matches,
+        });
+    }
+    catch (error) {
+        console.error("Error fetching matches:", error);
+        res.status(500).json({
+            message: "An error occurred while fetching matches.",
+        });
+    }
+});
+exports.getMatches = getMatches;

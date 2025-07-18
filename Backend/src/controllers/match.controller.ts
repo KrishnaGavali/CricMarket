@@ -50,3 +50,22 @@ export const addMatch = async (req: Request, res: Response): Promise<any> => {
     });
   }
 };
+
+export const getMatches = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const matches = await Match.find(
+      {},
+      "teamAName teamBName teamALogoURL teamBLogoURL"
+    );
+
+    res.status(200).json({
+      message: "Matches fetched successfully.",
+      matches,
+    });
+  } catch (error) {
+    console.error("Error fetching matches:", error);
+    res.status(500).json({
+      message: "An error occurred while fetching matches.",
+    });
+  }
+};
